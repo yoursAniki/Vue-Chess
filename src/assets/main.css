@@ -26,6 +26,13 @@
   width: 64px;
 }
 
+.cell img {
+  user-select: none;
+  max-height: 50px;
+  max-width: 50px;
+  position: relative;
+}
+
 .white {
   background-color: #E8EDF9;
 }

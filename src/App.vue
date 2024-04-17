@@ -12,6 +12,7 @@ onMounted(() => {
 const restart = () => {
   const newBoard = new Board()
   newBoard.initCells()
+  newBoard.addFigures()
   board.value = newBoard
 }
 </script>
