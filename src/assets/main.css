@@ -33,10 +33,25 @@
   position: relative;
 }
 
+/* .cell:has(img) {
+  cursor: pointer;
+} */
+
 .white {
   background-color: #E8EDF9;
 }
 
 .black {
   background-color: #B7C0D8;
+}
+
+.selected {
+  background-color: brown;
+}
+
+.available {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: #7B61FF;
 }
