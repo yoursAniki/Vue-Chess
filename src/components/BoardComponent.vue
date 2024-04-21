@@ -15,13 +15,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { Board } from '/src/models/Board.ts'
 import CellComponent from './CellComponent.vue'
 import { Cell } from '@/models/Cell'
 
 interface BoardProps {
   board: Board
+  setBoard: (board: Board) => void
 }
 
 const props: BoardProps = defineProps<BoardProps>()
@@ -33,12 +34,31 @@ const setSelectedCell = (cell: Cell | null) => {
 }
 
 function click(cell: Cell) {
-  if (cell.figure) {
+  if (
+    selectedCell.value &&
+    selectedCell.value !== cell &&
+    selectedCell.value?.figure?.canMove(cell)
+  ) {
+    selectedCell.value.moveFigure(cell)
+    setSelectedCell(null)
+  } else {
     setSelectedCell(cell)
   }
 }
 
+function highlightCells() {
+  props.board.highlightCells(selectedCell.value)
+  updateBoard()
+}
 
+watch(selectedCell, () => {
+  highlightCells()
+})
+
+function updateBoard() {
+  const newBoard = props.board.getCopyBoard()
+  props.setBoard(newBoard)
+}
 </script>
 
 <style scoped></style>
